@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        #mydiv {
+            position: absolute;
+            z-index: 9;
+            background-color: #f1f1f1;
+            border: 1px solid #d3d3d3;
+            text-align: center;
+        }
+
+        #mydivheader {
+            padding: 10px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196F3;
+            color: #fff;
+        }
+    </style>
+    <center>
+        <h3 id="getCo-ordinates"></h3>
+    </center>
+    <div id="mydiv">
+        <div id="mydivheader">Click here to move</div>
+    </div>
+
+    <script>
+
+        dragElement(document.getElementById("mydiv"));
+
+        function dragElement(elmnt) {
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById(elmnt.id + "header")) {
+                document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+            } else {
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            // let x = 10;
+            // let y = 20;
+            elmnt.style.top = pos3 + "px";
+            elmnt.style.left = pos4 + "px";
+            document.getElementById('getCo-ordinates').innerText = `The X and Y will be ${pos3} and ${pos4} respectively`
+
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.getElementById('getCo-ordinates').innerText = `The X and Y will be ${pos3} and ${pos4} respectively`
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                document.getElementById('getCo-ordinates').innerText = `The X and Y will be ${pos3} and ${pos4} respectively`
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+    </script>
+</body>
+
+</html>
