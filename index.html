@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body background="./map.png">
     <style>
         #mydiv {
             position: absolute;
@@ -19,19 +19,24 @@
         }
 
         #mydivheader {
-            padding: 10px;
+            padding: 1px;
             cursor: move;
             z-index: 10;
-            background-color: #2196F3;
+            width: 10px;
+            height: 10px;
+            background-color: #1b1d1f;
             color: #fff;
+            border-radius: 100%;
         }
     </style>
+    <br><br>
     <center>
         <h3 id="getCo-ordinates"></h3>
     </center>
     <div id="mydiv">
-        <div id="mydivheader">Click here to move</div>
+        <div id="mydivheader"></div>
     </div>
+
 
     <script>
 
